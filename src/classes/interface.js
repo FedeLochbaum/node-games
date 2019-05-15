@@ -1,5 +1,6 @@
 import ansi from 'ansi';
 const { stdout, stdin } = process;
+const translate = require('translate');
 
 let listeners = [];
 
@@ -20,6 +21,10 @@ export default class Interface {
 
     this.input.setRawMode(true);
     this.input.setEncoding('utf8');
+
+    this.translator = translate
+    console.log('de: ', this.translate.from)
+    console.log('a: ', this.translate.to)
 
     this.cursor = ansi(this.output).hide();
 
@@ -45,6 +50,10 @@ export default class Interface {
 
       match.forEach(listener => listener.fn());
     })
+  }
+
+  get translate(text) {
+    return await this.translator(text, translator.to)
   }
 
   get columns() {
