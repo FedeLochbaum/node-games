@@ -22,7 +22,7 @@ const us = {
   Angle: 'Angle',
 }
 
-export const LANGUAGUES = {
+export const LANGUAGES = {
   es,
   us
 }

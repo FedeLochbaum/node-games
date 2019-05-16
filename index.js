@@ -4,23 +4,23 @@ const us = 'us'
 const es = 'es'
 
 const DEFAULT_LANG = us
-const LANGUAGUES = { es, us } 
+const LANGUAGES = { es, us } 
 
 var game = process.argv[2]
 var lang = process.argv[3]
 
-global.SELECTED_LANG = LANGUAGUES[LANGUAGUES[lang] ? lang : DEFAULT_LANG]
+global.SELECTED_LANG = LANGUAGES[LANGUAGES[lang] ? lang : DEFAULT_LANG]
 
 if (!game) {
-  console.log('usage: node-games <game> <languague>\n');
+  console.log('usage: node-games <game> <language>\n');
   console.log('Games:')
   console.log('- spacecraft')
   console.log('- snake')
   console.log('- tanks\n')
   console.log('Optional params: \n')
-  console.log('Languagues: ')
-  console.log(Object.keys(LANGUAGUES).map( key => `- ${LANGUAGUES[key]}`).join('\n'))
-  console.log(`Default languague is ${DEFAULT_LANG}\n`)
+  console.log('Languages: ')
+  console.log(Object.keys(LANGUAGES).map( key => `- ${LANGUAGES[key]}`).join('\n'))
+  console.log(`Default language is ${DEFAULT_LANG}\n`)
   return;
 }
 

@@ -27,7 +27,7 @@ var us = {
   Angle: 'Angle'
 };
 
-var LANGUAGUES = exports.LANGUAGUES = {
+var LANGUAGES = exports.LANGUAGES = {
   es: es,
   us: us
 };

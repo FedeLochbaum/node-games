@@ -81,7 +81,7 @@ var Interface = function () {
   _createClass(Interface, [{
     key: 'translate',
     value: function translate(TEXT_KEY) {
-      return _translate.LANGUAGUES[global.SELECTED_LANG][TEXT_KEY];
+      return _translate.LANGUAGES[global.SELECTED_LANG][TEXT_KEY];
     }
   }, {
     key: 'clear',
