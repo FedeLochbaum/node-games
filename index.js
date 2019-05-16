@@ -26,11 +26,6 @@ if (!game) {
 
 console.log(`Running the game in ${global.SELECTED_LANG}`)
 
-const translate = require('translate');
-translate.from = DEFAULT_LANG;
-translate.to = global.SELECTED_LANG;
-
 require('babel-polyfill')
 
-require(__dirname + '/build/classes/interface')
 require(__dirname + '/build/' + game)

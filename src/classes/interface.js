@@ -1,6 +1,6 @@
 import ansi from 'ansi';
+import { LANGUAGUES } from '../utils/translate';
 const { stdout, stdin } = process;
-const translate = require('translate');
 
 let listeners = [];
 
@@ -21,10 +21,6 @@ export default class Interface {
 
     this.input.setRawMode(true);
     this.input.setEncoding('utf8');
-
-    this.translator = translate
-    console.log('de: ', this.translate.from)
-    console.log('a: ', this.translate.to)
 
     this.cursor = ansi(this.output).hide();
 
@@ -52,8 +48,8 @@ export default class Interface {
     })
   }
 
-  get translate(text) {
-    return await this.translator(text, translator.to)
+  translate(TEXT_KEY) {
+    return LANGUAGUES[global.SELECTED_LANG][TEXT_KEY]
   }
 
   get columns() {
