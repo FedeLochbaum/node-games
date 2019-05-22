@@ -1,4 +1,5 @@
 import ansi from 'ansi';
+import { LANGUAGES } from '../utils/translate';
 const { stdout, stdin } = process;
 
 let listeners = [];
@@ -45,6 +46,10 @@ export default class Interface {
 
       match.forEach(listener => listener.fn());
     })
+  }
+
+  translate(TEXT_KEY) {
+    return LANGUAGES[global.SELECTED_LANG][TEXT_KEY]
   }
 
   get columns() {

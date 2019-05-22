@@ -1,17 +1,31 @@
 #!/usr/bin/env node
 
-var game = process.argv[2];
+const us = 'us'
+const es = 'es'
+
+const DEFAULT_LANG = us
+const LANGUAGES = { es, us } 
+
+var game = process.argv[2]
+var lang = process.argv[3]
+
+global.SELECTED_LANG = LANGUAGES[LANGUAGES[lang] ? lang : DEFAULT_LANG]
 
 if (!game) {
-  console.log('usage: node-games <game>');
-  console.log('');
-  console.log('Games');
-  console.log('- spacecraft');
-  console.log('- snake');
-  console.log('- tanks');
+  console.log('usage: node-games <game> <language>\n');
+  console.log('Games:')
+  console.log('- spacecraft')
+  console.log('- snake')
+  console.log('- tanks\n')
+  console.log('Optional params: \n')
+  console.log('Languages: ')
+  console.log(Object.keys(LANGUAGES).map( key => `- ${LANGUAGES[key]}`).join('\n'))
+  console.log(`Default language is ${DEFAULT_LANG}\n`)
   return;
 }
 
-require('babel-polyfill');
+console.log(`Running the game in ${global.SELECTED_LANG}`)
 
-require(__dirname + '/build/' + game);
+require('babel-polyfill')
+
+require(__dirname + '/build/' + game)

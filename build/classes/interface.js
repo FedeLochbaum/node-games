@@ -1,41 +1,44 @@
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _ansi = require('ansi');
 
 var _ansi2 = _interopRequireDefault(_ansi);
 
+var _translate = require('../utils/translate');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var _process = process;
-var stdout = _process.stdout;
-var stdin = _process.stdin;
+var _process = process,
+    stdout = _process.stdout,
+    stdin = _process.stdin;
+
 
 var listeners = [];
 
-var prefix = '\u001b';
+var prefix = '\x1B';
 var keys = {
   right: prefix + '[C',
   up: prefix + '[A',
   left: prefix + '[D',
   down: prefix + '[B',
-  exit: '\u0003',
+  exit: '\x03',
   space: ' '
 };
 
-var Interface = (function () {
+var Interface = function () {
   function Interface() {
     var _this = this;
 
-    var output = arguments.length <= 0 || arguments[0] === undefined ? stdout : arguments[0];
-    var input = arguments.length <= 1 || arguments[1] === undefined ? stdin : arguments[1];
+    var output = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : stdout;
+    var input = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : stdin;
 
     _classCallCheck(this, Interface);
 
@@ -61,7 +64,7 @@ var Interface = (function () {
       });
 
       if (key === 'exit') {
-        _this.output.write('\u001b[2J\u001b[0;0H');
+        _this.output.write('\x1B[2J\x1B[0;0H');
         process.exit();
       }
 
@@ -76,9 +79,14 @@ var Interface = (function () {
   }
 
   _createClass(Interface, [{
+    key: 'translate',
+    value: function translate(TEXT_KEY) {
+      return _translate.LANGUAGES[global.SELECTED_LANG][TEXT_KEY];
+    }
+  }, {
     key: 'clear',
     value: function clear() {
-      this.output.write('\u001b[2J\u001b[0;0H');
+      this.output.write('\x1B[2J\x1B[0;0H');
     }
   }, {
     key: 'write',
@@ -109,6 +117,7 @@ var Interface = (function () {
       var deltaerr = Math.abs(delta.y / delta.x);
 
       var y = from.y;
+
 
       for (var x = from.x; x < to.x; x++) {
         this.cursor.goto(x, y);
@@ -145,6 +154,6 @@ var Interface = (function () {
   }]);
 
   return Interface;
-})();
+}();
 
 exports.default = Interface;

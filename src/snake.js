@@ -49,7 +49,7 @@ function loop() {
     gameover();
   }
 
-  ui.cursor.goto(0, 0).yellow().write(`Score: ${score}`);
+  ui.cursor.goto(0, 0).yellow().write(`${ui.translate('Score')}: ${score}`);
   ui.cursor.reset();
 
   setTimeout(loop, FRAME);
@@ -147,7 +147,7 @@ function createPart() {
 }
 
 function gameover() {
-  const MSG = 'Game Over!';
+  const MSG = `${ui.translate('GameOver')}!`;
   ui.cursor.goto(ui.center.x - MSG.length / 2, ui.center.y);
   ui.cursor.red();
   ui.cursor.bold();
@@ -155,7 +155,7 @@ function gameover() {
 
   ui.cursor.reset();
   ui.cursor.hex('#f65590');
-  const RETRY = 'Press any key to play again';
+  const RETRY = ui.translate('NewGameMessage');
   ui.cursor.goto(ui.center.x - RETRY.length / 2, ui.center.y + 2);
   ui.write(RETRY);
 

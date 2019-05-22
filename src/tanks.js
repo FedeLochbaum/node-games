@@ -21,7 +21,7 @@ function loop() {
 
   if (one.dead || two.dead) {
     let num = one.dead ? '2' : '1';
-    const msg = `Player ${num} won!`;
+    const msg = `${ui.translate('Player')} ${num} ${ui.translate('Won')}!`;
     ui.cursor.red();
     ui.cursor.bold();
 
@@ -50,12 +50,12 @@ function loop() {
 
   ui.cursor.goto(0, 1);
   if (turn() === one) ui.cursor.hex('#54ffff');
-  ui.write('Player 1');
+  ui.write(ui.translate('Player1'));
   ui.cursor.reset();
   ui.cursor.goto(0, 2);
-  ui.write('Health: ' + one.health);
+  ui.write(ui.translate('Health') + ': ' + one.health);
   ui.cursor.goto(0, 3);
-  ui.write('Angle: ' + parseInt(one.angle));
+  ui.write(ui.translate('Angle') + ': ' + parseInt(one.angle));
 
   two.draw();
   two.bullets.forEach((bullet, i) => {
@@ -75,12 +75,12 @@ function loop() {
 
   ui.cursor.goto(ui.output.columns - 10, 1);
   if (turn() === two) ui.cursor.hex('#54ffff');
-  ui.write('Player 2');
+  ui.write(ui.translate('Player2'));
   ui.cursor.reset();
   ui.cursor.goto(ui.output.columns - 10, 2);
-  ui.write('Health: ' + two.health);
+  ui.write(ui.translate('Health') + ': ' + two.health);
   ui.cursor.goto(ui.output.columns - 10, 3);
-  ui.write('Angle: ' + parseInt(two.angle));
+  ui.write(ui.translate('Angle') + ': ' + parseInt(two.angle));
 
   setTimeout(loop, FRAME);
 }
